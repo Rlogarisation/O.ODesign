@@ -1,4 +1,5 @@
-## Go through order
+# Content and Review Order
+## Lecture 01
 1. Circle.java -> simpliest version without any getter or setter.
 2. CircleWithGetter.java -> Circle with getter and setter.
 3. Hello folder -> Demonstrated basic usage and way to complie.
