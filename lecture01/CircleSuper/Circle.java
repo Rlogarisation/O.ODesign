@@ -53,6 +53,10 @@ public class Circle extends Object{
     public boolean equals(Object obj) {
    
         if(obj == null) { return false; }
+        // Comparing two address at this line,
+        // If two addresses are equal,
+        // then it must return true.
+        // Otherwise keep proceed to check whether they're equal.
         if(obj == this) { return true; }
 
         // Does it mean the name of the class? e.g Circle?
@@ -61,10 +65,11 @@ public class Circle extends Object{
             return false;
         }
 
-        // both are of type Circle at this point.
+        // Object cannot changed adaptively to current class.
+        // Hence we need to specify the class.
         Circle other = (Circle) obj;
 
-        
+        // Then finally compare the key values in the class.
         if(this.x == other.x && this.y == other.y && this.r == other.r){
             return true;
         }
