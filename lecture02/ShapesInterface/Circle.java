@@ -1,4 +1,4 @@
-package Shapes;
+package ShapesInterface;
 
 
 /**
@@ -10,13 +10,9 @@ package Shapes;
  *
  */
 
-public class Circle  extends Shape {
+public class Circle  implements ShapeI {
 
-	// Private is better design.
-	// Protected here is for educational purpose.
-	
 	protected static final double pi = 3.14159; 
-	protected int p = 0;
 	int  x, y;
 	protected  int  r;
 	protected static int count_circle = 0;
@@ -29,17 +25,12 @@ public class Circle  extends Shape {
 		this.y = 1;
 		this.r = 1;
 
-		count_circle++; 
-		count_shapes++;
+		count_circle++; 	
 	}
 	
 	public Circle(int r){
-		this.x = 1;
-		this.y = 1;
+		this();
 		this.r = r;
-
-		count_circle++; 
-		count_shapes++;
 	}
 	
 	/**
@@ -52,7 +43,6 @@ public class Circle  extends Shape {
 		this.setY(y);
 
 		count_circle++; 
-		count_shapes++;
 	}	
 	
 	/**
@@ -61,7 +51,7 @@ public class Circle  extends Shape {
 	 * @param y y axis
 	 * @param r radius 
 	 */
-	public Circle(int x, int y, int r){
+	public Circle(int x, int y, int r)  {
 		// First call the constructor Circle(int x, int y)
 		// from this class
 		this(x,y);   
@@ -122,7 +112,5 @@ public class Circle  extends Shape {
             return false;
         }
     }
-
-	
-	
+		
 }

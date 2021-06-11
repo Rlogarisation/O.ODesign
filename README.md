@@ -1,24 +1,51 @@
 # Content and Review Order
+
 ## Lecture 01
+
 1. Circle.java -> simpliest version without any getter or setter.
+
 2. CircleWithGetter.java -> Circle with getter and setter.
+
 3. Hello folder -> Demonstrated basic usage and way to complie.
+
 4. Vehicle.java -> Subclasses (implemented by extend)
+
 5. Animal.java -> Superclass or parent (implemented by super).
+
 6. Static.java -> explain the usage of static, and difference between use static and no using it.
+
 7. Private.java -> The private keyword is an access modifier used for attributes, methods and constructors, making them only accessible within the declared class.
+
 8. Protected.java -> The protected keyword is an access modifier used for attributes, methods and constructors, making them accessible in the same package and subclasses.
+
 Note:
+
 Most restricted -> Less restricted:
+
 Private(Same class only) -> Protected(Same packages or subclasses) -> Public(all other classes)
 
+
+
 9. CircleSuper folder -> main function in Test1.java
+
+10. Iterating array.
+
+    ```java
+    int array[] = {1, 2, 3, 4, 5};
+    for (int elem : array) {
+      result += elem;
+    }
+    ```
+
+    
 
 ## Lecture 02
 
 ### Questions:
 
-- What is the difference between Method forwarding and inheritance other than "has-a" "is-a" relationship? Does the extending class have impact on the super class? Why method forwarding is prefered in most cases?
+- What is the difference between Method forwarding and inheritance other than "has-a" "is-a" relationship? Does the extending class have impact on the super class? Why method forwarding is prefered in most cases? 
+
+  The lecturer stated: "the advantage is that we are only forwarding the function we need, rather than extending everything. I don't care if someone remove the other function tomorrow" , "and we could also modify on the base of this." <u>But inheritance could also be modified, right?</u>
 
 - What is package?
 
@@ -26,159 +53,155 @@ Private(Same class only) -> Protected(Same packages or subclasses) -> Public(all
 
 
 
-### Review order:
+### Review order
 
-1. Shapes folder
+1. Shapes/Circle.java: Super class.
 
-   1. Circle.java: Super class.
+2. Shapes/GraphicalCircle.java: super class with **is-a** relationship, GraphicalCircle **is-a** Circle.
 
-   2. GraphicalCircle.java: super class with **is-a** relationship, GraphicalCircle **is-a** Circle.
+   
 
-      
+   <u>Below is how to repeat calling by using super in is-a relationship</u>
 
-      <u>Below is how to repeat calling by using super in is-a relationship</u>
+   ```java
+   public class GraphicalCircle extends Circle {
+   
+   	Color outline, fill;
+   
+     public GraphicalCircle() {
+         // First call no-arg constructor from the super class Circle
+         super();
+         //Set additional values for this sub-class
+         //Color is the package.
+         this.outline = Color.black;
+         this.fill = Color.white;
+         x = 70;
+       }
+     public GraphicalCircle(int x, int y, int r, Color o, Color f) {
+   		super(x, y, r); // call 3-arg constructor from Circle
+   		this.outline = o;
+   		this.fill = f;
+   	}
+   ```
 
-      ```java
-      public class GraphicalCircle extends Circle {
-      
-      	Color outline, fill;
-      
-        public GraphicalCircle() {
-            // First call no-arg constructor from the super class Circle
-            super();
-            //Set additional values for this sub-class
-            //Color is the package.
-            this.outline = Color.black;
-            this.fill = Color.white;
-            x = 70;
-          }
-        public GraphicalCircle(int x, int y, int r, Color o, Color f) {
-      		super(x, y, r); // call 3-arg constructor from Circle
-      		this.outline = o;
-      		this.fill = f;
-      	}
-      ```
+   so the super() will call this function only in Circle class:
 
-      so the super() will call this function only in Circle class:
+   ```java
+   public Circle(){
+   		this.x = 1;
+   		this.y = 1;
+   		this.r = 1;
+   
+   		count_circle++; 
+   		count_shapes++;
+   	}
+   ```
 
-      ```java
-      public Circle(){
-      		this.x = 1;
-      		this.y = 1;
-      		this.r = 1;
-      
-      		count_circle++; 
-      		count_shapes++;
-      	}
-      ```
+   
 
-      and super(x,y,r) is similar:
+   <u>How to update the @override function</u>
 
-      ```java
-      public Circle(int x, int y, int r){
-      		// First call the constructor Circle(int x, int y)
-      		// from this class
-      		this(x,y);   
-      		
-      		// Now set r
-      		this.setR(r);
-      
-      	}
-      ```
+   originally in super:
 
-      
+   ```java
+   @Override
+       public boolean equals(Object obj) {
+   
+           if(obj == null ) { return false;}
+           if(this.getClass() != obj.getClass()){
+               return false;
+           }
+   
+           Circle other = (Circle) obj;
+           if(other.x == this.x && other.y == this.y && other.r == this.r){
+               return true;
+           }
+           else{
+               return false;
+           }
+   ```
 
-      <u>How to update the @override function</u>
+   then to update @Override due to extra variables.
 
-      originally in super:
+   ```java
+   @Override
+       public boolean equals(Object obj) {
+   
+           if(super.equals(obj) == false) { return false; } 
+   
+           GraphicalCircle other = (GraphicalCircle) obj;
+   
+   				if(other.outline.equals(this.outline) && 
+   		   		 other.fill.equals(this.fill)) {
+               return true;
+           }
+           else{
+               return false;
+   		}
+   	}
+   ```
 
-      ```java
-      @Override
-          public boolean equals(Object obj) {
-      
-              if(obj == null ) { return false;}
-              if(this.getClass() != obj.getClass()){
-                  return false;
-              }
-      
-              Circle other = (Circle) obj;
-              if(other.x == this.x && other.y == this.y && other.r == this.r){
-                  return true;
-              }
-              else{
-                  return false;
-              }
-      ```
+3. Shapes/GraphicalCircle2.java: **Has-a** relationship, a GraphicalCircle has a Circle.
 
-      then to update @Override due to extra variables.
+   ```java
+   	// here's the math circle
+   	Circle c;
+   	// The new graphics variables go here
+   	Color outline, fill;
+   
+   	// Very simple constructor
+   	public GraphicalCircle2() {
+   		c = new Circle();
+   		this.outline = Color.black;
+   		this.fill = Color.white;
+   	}
+   
+   	// Another simple constructor
+   	public GraphicalCircle2(int x, int y, int r, 
+   							Color o, Color f) {
+   		c = new Circle(x, y, r);
+   		this.outline = o;
+   		this.fill = f;
+   	}
+   ```
 
-      ```java
-      @Override
-          public boolean equals(Object obj) {
-      
-              if(super.equals(obj) == false) { return false; } 
-      
-              GraphicalCircle other = (GraphicalCircle) obj;
-      
-      				if(other.outline.equals(this.outline) && 
-      		   		 other.fill.equals(this.fill)) {
-                  return true;
-              }
-              else{
-                  return false;
-      		}
-      	}
-      ```
+   similar with @override method:
 
-   3. GraphicalCircle2.java: **Has-a** relationship, a GraphicalCircle has a Circle.
+   ```java
+   @Override
+   public boolean equals(Object obj) {
+   
+     if(obj == null ) { return false;}
+     if(this.getClass() != obj.getClass()){
+       return false;
+     }
+   
+     GraphicalCircle2 other = (GraphicalCircle2) obj;
+     if( this.c.equals(other.c) && 
+        other.fill.equals(this.fill)  && 
+        other.outline.equals(this.outline)  ){
+   
+       return true;
+     }
+     else{
+       return false;
+     }
+   }
+   ```
 
-      ```java
-      	// here's the math circle
-      	Circle c;
-      	// The new graphics variables go here
-      	Color outline, fill;
-      
-      	// Very simple constructor
-      	public GraphicalCircle2() {
-      		c = new Circle();
-      		this.outline = Color.black;
-      		this.fill = Color.white;
-      	}
-      
-      	// Another simple constructor
-      	public GraphicalCircle2(int x, int y, int r, 
-      							Color o, Color f) {
-      		c = new Circle(x, y, r);
-      		this.outline = o;
-      		this.fill = f;
-      	}
-      ```
+   But worth mention the method forwarding for same functions since we don't have extend here.
 
-      similar with @override method:
+   ```java
+   public double area() {
+     return c.area(); // Using the function in c from Circle().
+   }
+   
+   public double circumference() {
+     return c.circumference();
+   }
+   ```
 
-      ```java
-      @Override
-      public boolean equals(Object obj) {
-      
-        if(obj == null ) { return false;}
-        if(this.getClass() != obj.getClass()){
-          return false;
-        }
-      
-        GraphicalCircle2 other = (GraphicalCircle2) obj;
-        if( this.c.equals(other.c) && 
-           other.fill.equals(this.fill)  && 
-           other.outline.equals(this.outline)  ){
-      
-          return true;
-        }
-        else{
-          return false;
-        }
-      }
-      ```
-
-      
+   
 
 2. AnimalAbstract.java : 
 
@@ -189,6 +212,37 @@ Private(Same class only) -> Protected(Same packages or subclasses) -> Public(all
    In each sub-class, we could define different animal sound for different sub-class animals.
 
    And print/other operation all animal sounds out with one command.
+
+   ```java
+   // Abstract class
+   abstract class AnimalAbstract {
+       // Abstract method (does not have a body)
+       public abstract void animalSound();
+       // Regular method
+       public void sleep() {
+           System.out.println("Zzz");
+       }
+   }
+     
+     // Subclass (inherit from Animal)
+   class Pig extends AnimalAbstract {
+       public void animalSound() {
+           // The body of animalSound() is provided here
+           System.out.println("The pig says: wee wee");
+       }
+   }
+     
+   class Main {
+       public static void main(String[] args) {
+           Pig myPig = new Pig(); // Create a Pig object
+           myPig.animalSound();
+           myPig.sleep();
+       }
+   }
+   
+   ```
+
+   
 
 3. This explain the significance of Abstract. The area of different shape/ sub-classes can be sum up in one line.
 
@@ -246,4 +300,52 @@ Private(Same class only) -> Protected(Same packages or subclasses) -> Public(all
    }
    ```
 
+5. instanceof is type comparison function.
+
+   ```java
+   // instanceof will match objects of types Circle and its subclasses under circle like GraphicalCircle.
+   // if shapes[i] has type GraphicalCircle, then this statement still true.
+   if(shapes[i] instanceof Circle ) {
+     count_circle++;
+   }
    
+   // the following will only match Circle ONLY.
+   if(shapes[i].getClass() == Circle.class){
+     onlyCircleClass_count++;
+   }
+   ```
+
+6. Shapes/Shape.java is a abstract file, equivalent to .h.
+
+7. Shapes/TestCircle.java is main file.
+
+8. ShapesInterface/ introduced interfaces and implementations.
+
+9. ArrayList:
+
+   The `ArrayList` class is a resizable [array](https://www.w3schools.com/java/java_arrays.asp), which can be found in the `java.util` package.
+
+   The difference between a built-in array and an `ArrayList` in Java, is that the size of an array cannot be modified (if you want to add or remove elements to/from an array, you have to create a new one). While elements can be added and removed from an `ArrayList` whenever you want.
+
+   ```java
+   import java.util.ArrayList;
+   
+   public class Main {
+     public static void main(String[] args) {
+       ArrayList<String> cars = new ArrayList<String>();
+       cars.add("Volvo");
+       cars.add("BMW");
+       cars.add("Ford");
+       cars.add("Mazda");
+       cars.set(0, "Benz");
+       cars.remove(0);
+       // Same as: System.out.println(cars);
+       for (int i = 0; i < cars.size(); i++) {
+         System.out.println(cars.get(i));
+       }
+     }
+   }
+   ```
+
+10. SampleInheritance/ folder
+

@@ -1,4 +1,4 @@
-package Shapes;
+package ShapesInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,7 +11,7 @@ import java.awt.Graphics;
  *
  */
 
-public class GraphicalCircle2 {
+public class GraphicalCircle2 implements ShapeI {
 	// here's the math circle
 	Circle c;
 	// The new graphics variables go here
@@ -19,8 +19,6 @@ public class GraphicalCircle2 {
 
 	// Very simple constructor
 	public GraphicalCircle2() {
-		// Compiler will automatically insert 
-		// Super() as discussed in the lecture.
 		c = new Circle();
 		this.outline = Color.black;
 		this.fill = Color.white;
@@ -43,13 +41,7 @@ public class GraphicalCircle2 {
 	}
 	
 
-	// Here are the old methods using method forwarding.
-	/**
-	 * The advantage is we are only forwarding the function we need,
-	 * rather than extending everything.
-	 * and we could also modify on the base of this.
-	 */
-
+	// Here are the old methods
 	public double area() {
 		return c.area();
 	}
@@ -58,13 +50,6 @@ public class GraphicalCircle2 {
 		return c.circumference();
 	}
 
-	public void setX(int x){
-		c.setX(x);
-	}
-
-	public int getX(){
-		return c.getX();
-	}
 
     @Override
     public boolean equals(Object obj) {
@@ -86,5 +71,5 @@ public class GraphicalCircle2 {
         }
     }
 
-	
+
 }

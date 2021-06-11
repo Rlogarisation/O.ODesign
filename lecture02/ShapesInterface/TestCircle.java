@@ -1,27 +1,7 @@
-package Shapes;
+package ShapesInterface;
 
 import java.awt.Color;
-
-/*
-c1 area is: 50.26544
-c2 area is: 28.274309999999996
-c3 area is: 3.14159
-c4 area is: 50.26544
-Circle.count_circle : 4
-total_area is: 136.66359999999997
-count_circle is: 2
-onlyCircle_count is: 1
-Circle.count_circle : 6
-Shape.count_shapes : 8
-(1) Radius is:2
-(2) Radius is:2
- (from Shape abstract class, method printArea)> area is: 12.56636
- (from Shape abstract class, method printArea)> area is: 3.0
- (from Shape abstract class, method printArea)> area is: 8.0
- (from Shape abstract class, method printArea)> area is: 113.09723999999999
-
-*/
-
+import java.util.ArrayList;
 
 /**
  * Demo file, it may not be correct and/or complete.  
@@ -52,77 +32,78 @@ public class TestCircle {
 		 * Class variable, "Circle.count_circle" 
 		 */
 		System.out.println("Circle.count_circle : " + Circle.count_circle);	
-		
+
 		/**
 		 *  Methods Overriding, 
 		 *  Polymorphism Example
 		 */
 		// create an array to hold shapes
-		Shape[] shapes = new Shape[4];    
-		shapes[0] = new Circle(4, 6, 2);
-		shapes[1] = new Rectangle(1.0, 3.0);
-		shapes[2] = new Rectangle(4.0, 2.0);
-		shapes[3] = new GraphicalCircle(1, 1, 6, 
-					    Color.green, Color.yellow);
+		ArrayList<ShapeI> shapes = new ArrayList<ShapeI>();
+
+		shapes.add(new Circle(4, 6, 2));
+		shapes.add(new Rectangle(1.0, 3.0));
+		shapes.add(new Rectangle(4.0, 2.0));
+		shapes.add(new GraphicalCircle(1, 1, 6, 
+					    Color.green, Color.yellow));
+		shapes.add(new GraphicalCircle(5, 3, 4, 
+						Color.green, Color.yellow));
+						
 
 		int count_circle = 0;
 		double total_area = 0;
 		int onlyCircleClass_count = 0;
 
-		for(int i = 0; i < shapes.length; i++) {
+		for(int i = 0; i < shapes.size(); i++) {
 			
 			// Compute the area of the shapes using
 			// polymorphism (behaviour) below.
 			
-			total_area += shapes[i].area();    
+			total_area += shapes.get(i).area();    
 			
 			// instanceof will match objects of types Circle and its subclasses (like GraphicalCircle)
-			if(shapes[i] instanceof Circle ) {
+			if(shapes.get(i) instanceof Circle ) {
 				count_circle++;
 			}
 
 			// the following will only match objects of type Circle
-			if(shapes[i].getClass() == Circle.class){
+			if(shapes.get(i).getClass() == Circle.class){
 				onlyCircleClass_count++;
 			}
 			
 		} 						       		  
 
 		System.out.println("total_area is: " + total_area );
-		
 		System.out.println("count_circle is: " + count_circle );
 		System.out.println("onlyCircle_count is: " + onlyCircleClass_count );
 
 		
 		/**
-		 * Class variables, 
-		 * "Circle.count_circle" and "Shape.count_shapes"
+		 * Class variable "Circle.count_circle" 
 		 */
 		System.out.println("Circle.count_circle : " + Circle.count_circle);	
-		System.out.println("Shape.count_shapes : " + Shape.count_shapes);	
 
 		/**
 		 * Casting example
 		 * if shapeTemp is an instance of class Circle, 
 		 * cast it to Circle, and call the instance method getR().
 		 */
-		Shape shapeTemp = shapes[0]; 
+		ShapeI shapeTemp = shapes.get(0); 
 		
 		/* Use of "instanceof"
 		 * 
-		 * Let's check if an object (shapeTemp) of type Shape is also 
+		 * Let's check if an object (shapeTemp) of type ShapeI is also 
 		 * an instance-of Circle, if yes, cast it to Circle and print radius
 		 */
 		if( shapeTemp instanceof Circle ) {
 			
 			// cast shapes[0] to Circle class
-			Circle cTemp = (Circle) shapes[0]; 
+			Circle cTemp = (Circle) shapeTemp; 
 			
 			// call the instance method getR from the class Circle
 			System.out.println(  "(1) Radius is:" + cTemp.getR()   )  ;
 			
 			// Or use the following one-liner ... 
-			System.out.println(  "(2) Radius is:" + ( (Circle) shapes[0] ).getR()   )  ;
+			System.out.println(  "(2) Radius is:" + ( (Circle) shapes.get(0) ).getR()   )  ;
 		}
 
 		/** 
@@ -130,7 +111,7 @@ public class TestCircle {
 		 * in  the abstract class "Shape"
 		 * */ 
 
-		for(Shape s : shapes){
+		for(ShapeI s : shapes){
 			s.printArea();
 		}
 		

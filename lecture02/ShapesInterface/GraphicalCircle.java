@@ -1,4 +1,4 @@
-package Shapes;
+package ShapesInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,7 +16,7 @@ import java.awt.Graphics;
 public class GraphicalCircle extends Circle {
 
 	Color outline, fill;
-	
+
 	/**
 	 * No-arg constructor for GraphicalCircle
 	 */
@@ -24,7 +24,6 @@ public class GraphicalCircle extends Circle {
 		// First call no-arg constructor from the super class Circle
 		super();
 		//Set additional values for this sub-class
-		//Color is the package.
 		this.outline = Color.black;
 		this.fill = Color.white;
 		x = 70;
@@ -52,20 +51,20 @@ public class GraphicalCircle extends Circle {
 		g.fillOval(x - r, y - r, 2 * r, 2 * r);
 	}
 
-	
 	@Override
     public boolean equals(Object obj) {
 
-        if(super.equals(obj) == false) { return false; } 
+        if(super.equals(obj) == false) { return false;} 
 
         GraphicalCircle other = (GraphicalCircle) obj;
+		if(  other.outline.equals(this.outline) && 
+		     other.fill.equals(this.fill)     )  {
 
-		if(other.outline.equals(this.outline) && 
-		   other.fill.equals(this.fill)) {
             return true;
         }
         else{
             return false;
 		}
 	}
+
 }
