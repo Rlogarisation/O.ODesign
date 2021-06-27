@@ -349,3 +349,33 @@ Private(Same class only) -> Protected(Same packages or subclasses) -> Public(all
 
 10. SampleInheritance/ folder
 
+## Lecture 03
+1. /demeter/example: good and correct design.
+2. /demeter/car: bad design in class A, calling fri of fri of fri.
+
+
+## lecture 04
+
+### Everything this is about how to avoid switch statement by using strategies 
+
+1. /PatternStrategyOk/car/ (car2+car2Test) => switch statement exist == bad design, violated open and close relationship.
+
+   In improve this, we think "Engine" or "Brake" don't neccessary to be String, should be a class or instance with certain properties.
+
+2. Hence, in /PatternStrategyOk/car/car.java. We create class BrakeStrategy, create an interface called BrakeStratygy.java, and create each brake type as class and implement the interface.
+
+   Also we can create specified car as class, and extend car class, and call super with brake class and engine class.
+
+3. /PatternStrategyOk/cart/cart.java, simlar example as car discussed above.
+
+4. /HFDP_Strategy_State/ State/ Gumball: Bad design example with switch statement.
+
+5. /HFDP_Strategy_State/ State/ gumballState: Good example, "State" becomes interface, all methods are contained in state.
+
+6. /PatternObserver/Weather: If there is any change in temperature, the program should alert all observer.
+
+   We have Thermometer and Hydrometer under interface Subject, and DisplayUSA and DisplayAus under interface Observer.
+
+   However, this is a issue when updating either temperture or humidity, we have to distinguish the into argument/object is which type.
+
+7. /WeatherV2: This problem is solved by implementing interfaces for both specified objects and observers.
