@@ -379,3 +379,10 @@ Private(Same class only) -> Protected(Same packages or subclasses) -> Public(all
    However, this is a issue when updating either temperture or humidity, we have to distinguish the into argument/object is which type.
 
 7. /WeatherV2: This problem is solved by implementing interfaces for both specified objects and observers.
+
+
+## Lecture 05
+
+1. /PatternComposite discussed typesafe and uniformity. The interface will not have add or remove methods for leaf node in typesafe composite, but the uniformity will implement in interface, and do nothing in leaf node function.
+2. /HFDP_Composite used uniformity, and illustrated the way to print out specified menu item by using instanceof.
+3. /myDbC explained the Exception, try...catch...finally. Finally will always be executed, useful for closing the file when a error occured.
