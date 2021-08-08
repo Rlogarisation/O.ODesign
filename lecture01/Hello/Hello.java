@@ -14,7 +14,6 @@ public class Hello {
 
         int counter = 0;
 
-        // ?
         for(String str : args){
             System.out.println(++counter + " :: " + str);
         }

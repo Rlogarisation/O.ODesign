@@ -32,16 +32,10 @@ public class Circle {
         System.out.println(circleA.circumference());
         System.out.println(circleA.area());
 
-        // What if we dont use getter to get the value of x,
-        // It still can work, then what is the point of using getter.
         System.out.println(circleA.x);
 
-        // What if we want to change the value of x straight away?
-        // Rather than using setter?
-        // This is still runable.
         circleA.x = 2;
         System.out.println(circleA.x);
 
-        // Then what is the point of using getter and setter?
     }
 }
