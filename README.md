@@ -326,9 +326,39 @@
 4. MyAssociation/: customer aggregation with cart, and cart composition with items in cart. Customer will still exist if cart is destroyed, but all items inside cart will disappeared.
 5. refactoringOrg/: demonstrated all different methods of refracting.
 
-## lecture 04
+## Design Patterns
 
-Everything this is about how to avoid switch statement by using strategies 
+* Behavioural pattern
+  * Strategy pattern
+  * State pattern
+  * Observer pattern
+* Structural pattern
+  * Composite pattern
+* Creational pattern 
+
+## lecture 04: Design principles(cont.)
+
+### Key Concept
+
+* Design principle #3
+  * Identify aspects of your code that varies and “encapsulate” and separate it from code that stays the same, so that it won’t affect your real code.
+* Design Principle #4
+  * Program to a an interface, not to an implementation.
+* Design Principle #5
+  * Favour composition over inheritance
+* Strategy Pattern
+  * Define a family of algorithms, encapsulate each one, and make them interchangeable
+  * A class defines many behaviours, and these appears as multiple conditional statements (e.g., if or switch). Instead, move each conditional branch into their own concrete strategy class
+  * attack strategy for each enemy in our group project.
+* State Pattern
+  * put different states into different classes, and consequential behaviours as method in interface.
+  * Similar to strategy pattern, but intention is different. Strategy pattern encapsulates algorithm, state pattern encapsulates the behaviours for each state. 
+* Observer Pattern
+  * This allows the Subject and its Observers to be at different levels of abstractions in a system.
+  * Allows dynamic registration and deregistration.
+  * Call notify function in set function, since the variable is changed.
+
+### Lecture Sample Code
 
 1. /PatternStrategyOk/car/ (car2+car2Test) => switch statement exist == bad design, violated open and close relationship.
 
@@ -352,19 +382,47 @@ Everything this is about how to avoid switch statement by using strategies
 
 7. /WeatherV2: This problem is solved by implementing interfaces for both specified objects and observers.
 
+------
 
-## Lecture 05
+## Week 05: Composite Pattern, Design by Contrast, and Exception
+
+### Key Concept
+
+* Composite Pattern
+  * Aim is to be able to manipulate a single instance of the object just as we would manipulate a group of them.
+  * For example, calculating size of a file should be same as a directory.
+  * Tree structures are normally used to represent part-whole hierarchies.  A multiway tree structure  stores a collection of say Components at each node (children below), to store Leaf objects and Composite (subtree) objects. 
+  * Type Safety vs Uniformity
+    * Design for Type Safety: only define child-related operations in the Composite class. i.e. no getChild() in leaf.
+    * Design for Uniformity: include all child-related operations in the Component interface. i.e. Even has getChild() in leaf.
+* Design by Contract
+  * Design by contract: At the design time, responsibilities are clearly assigned to different software elements, clearly documented and enforced during the development using unit testing and/or language support.
+    * Pre-condition - what does the contract expect? (input range etc.)
+    * Post-condition - what does the contract guarantee? (return correct and expected value type etc.)
+    * Invariant - what does the contract maintain? (Some values must satisfy constraints, before and after the execution (say of the method). For example: a value of mark remains between zero and 100.)
+  * Defensive programming: Tries to address unforeseen circumstances, in order to ensure the continuing functionality of the software element. For example, it makes the software behave in a predictable manner despite unexpected inputs or user actions.
+  * Preconditions may be **weakened** (relaxed) in a subclass, but it must comply with the inherited contract.
+  * Post-conditions may be **strengthened** (more restricted) in a subclass, but it must comply with the inherited contract. 
+* Exception(try...catch...finally)
+  * Checked exception: All classes that inherit from class Exception but not directly or indirectly from class RuntimeException are considered to be checked exceptions. 
+  * Unchecked exception: All classes that are subclasses of RuntimeException (typically caused by defects in your program’s code) or Error (typically ‘system’ issues) are unchecked exceptions. 
+
+### Lecture Sample Code
 
 1. /PatternComposite discussed typesafe and uniformity. The interface will not have add or remove methods for leaf node in typesafe composite, but the uniformity will implement in interface, and do nothing in leaf node function.
 2. /HFDP_Composite used uniformity, and illustrated the way to print out specified menu item by using instanceof.
 3. /myDbC explained the Exception, try...catch...finally. Finally will always be executed, useful for closing the file when a error occured.
 4. /Dbc exceptions for different cases, and provide different corresponding meaningful message
 
+------
 
-## Lecture 07
+
+## Week 07
 
 1. /MyCollection1: demo how to sort the collection via different factor.
 
-## Lecture08
+------
+
+## Week 08
 
 1. Decorator pattern: coffee example
