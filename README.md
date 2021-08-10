@@ -332,9 +332,18 @@
   * Strategy pattern
   * State pattern
   * Observer pattern
+  * Iterator pattern
+  * Template pattern
+  * Visitor pattern
 * Structural pattern
   * Composite pattern
+  * Decorator pattern
+  * Adapter pattern
 * Creational pattern 
+  * Factory method
+  * Abstract factory
+  * Builder pattern
+  * Singleton pattern
 
 ## lecture 04: Design principles(cont.)
 
@@ -416,13 +425,116 @@
 
 ------
 
+## Week 07: Generics, Collections, and Iterator Pattern
 
-## Week 07
+### Key Concept
+
+* Generics
+  * Generics enable types (classes and interfaces) to be parameters when defining: classes, interfaces and methods. (Specify the type of object is going to create)
+  * Removes casting and offers stronger type checks at compile time, and adds stability to your code by making more of your bugs detectable at compile time.
+* Collection
+  * A collections framework is a unified architecture for representing and manipulating  collections. A collection is simply an object that groups multiple elements into a single unit. 
+  * e.g. List is collection for ArrayList, LinkedList and etc.
+* Iterator Pattern
+  * **Iterator** is a behavioural design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
+* Code Smell
+  * Long method
+  * Large class
+  * Long parameter list
+  * Data clumps
+    * Different parts of the code contain identical groups of variables e.g., fields in many classes, parameters in many method signatures
+  * Refused bequest
+    * A subclass uses only some of the methods and properties inherited from its parents
+  * Duplicate code
+  * Feature envy
+    * A method that is more interested in a class other than the one it actually is
+    * Invokes several methods on another object to calculate some value
+  * Divergent change
+    * One class is changed in different ways for different reasons
+  * Shot gun surgery
+    * A small change in the code forces lots of little changes to different classes
+  * Data class
+    * Classes that just have attributes with setters and getters and no behaviour
+    * One of the goals of OO design is to put behaviour where the data is
+  * Lazy class
+    * Classes that aren’t doing much to justify their existence (maintenance overhead)
+  * Switch statement
+
+### Lecture Sample Code
 
 1. /MyCollection1: demo how to sort the collection via different factor.
 
 ------
 
-## Week 08
+## Week 08: Decorator, Adapter, and Template Pattern
 
-1. Decorator pattern: coffee example
+### Key Concept
+
+* Decorator pattern
+  * Decorator design patterns allow us to selectively add functionality to an object (not the class) at runtime, based on the requirements.
+* Adapter pattern
+  * Convert the interface of a class into another interface clients expect.  Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
+  * The adapter pattern is often used to make existing classes (APIs) work with a client class  without modifying their source code.
+* Template pattern
+  * Template Method is a behavioural design pattern that defines the skeleton of an algorithm in the superclass but lets subclasses override specific steps of the algorithm without changing its structure.
+  * The Template Method pattern suggests that you break down an algorithm into a series of steps, turn these steps into methods, and put a series of calls to these methods inside a single template method.
+* Template versus Strategy pattern
+  * Template Method works at the class level, so it’s static.  
+  * Strategy works on the object level, letting you switch behaviours at runtime. 
+  * Template Method is based on inheritance: it lets you alter parts of an algorithm by extending those parts in subclasses.  
+  * Strategy is based on composition: you can alter parts of the object’s behaviour by  supplying it with different strategies that correspond to that behaviour at runtime. 
+
+------
+
+## Week 09: Creational Patterns and Visitor Pattern
+
+### Key Concept
+
+* Factory method
+
+  * Factory Method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+
+  * The Factory Method pattern suggests that you replace direct object construction calls (using the `new` operator) with calls to a special *factory* method
+
+  * The special factory method is a static method and will return (new something()), or can be used as instance method as well.
+
+  * Usage: for creating different types of satellite in assignment. Client only need to call this to get a specified satellite without knowing the underlying logic.
+
+    ```java
+    Satellite mySatelliteA = SatelliteFactory.newSatellite(satelliteType);
+    ```
+
+* Abstract factory pattern
+
+  * Abstract Factory is a creational design pattern that lets you produce families of related objects without specifying their concrete classes.
+  * For example, interface for furniture with methods of createChair() or createTable() etc, then subclasses are different style of furniture.
+
+* Builder pattern
+
+  * Builder is a creational design pattern that lets you construct complex objects step by step. The pattern allows you to produce different types and representations of an object using the same construction code.
+  * The Builder pattern suggests that you extract the object construction code out of its own class and move it to separate objects called *builders*.
+  * The pattern organizes object construction into a set of steps (`buildWalls`, `buildDoor`, etc.). To create an object, you execute a series of these steps on a builder object. The important part is that you don’t need to call all of the steps. You can call only those steps that are necessary for producing a particular configuration of an object.
+  * For example, imagine a builder that builds everything from wood and glass, a second one that builds everything with stone and iron and a third one that uses gold and diamonds. By calling the same set of steps, you get a regular house from the first builder, a small castle from the second and a palace from the third. However, this would only work if the client code that calls the building steps is able to interact with builders using a common interface.
+  * You can go further and extract a series of calls to the builder steps you use to construct a product into a separate class called *director*. The director class defines the order in which to execute the building steps, while the builder provides the implementation for those steps.
+  * Relationship with other patterns
+    * Many designs start by using Factory Method (less complicated and more customizable via subclasses) and evolve toward Abstract Factory, or Builder (more flexible, but more complicated).
+    * Builder focuses on constructing complex objects step by step. 
+    * Abstract Factory specializes in creating families of related objects
+    * Abstract Factory returns the product immediately, whereas Builder lets you run some additional construction steps before fetching the product.
+
+* Singleton pattern
+
+  * **Singleton** is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
+  * Make the default constructor private, to prevent other objects from using the `new` operator with the Singleton class.
+  * Create a static creation method that acts as a constructor. Under the hood, this method calls the private constructor to create an object and saves it in a static field. All following calls to this method return the cached object.
+  * You can be sure that a class has only a single instance.
+  * You gain a global access point to that instance.
+  * The singleton object is initialized only when it’s requested for the first time.
+
+* Visitor pattern
+
+  * **Visitor** is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
+  * The Visitor pattern suggests that you place the new behavior into a separate class called *visitor*, instead of trying to integrate it into existing classes. The original object that had to perform the behavior is now passed to one of the visitor’s methods as an argument, providing the method access to all necessary data contained within the object.
+
+
+

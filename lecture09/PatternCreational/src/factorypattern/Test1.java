@@ -28,4 +28,15 @@ public class Test1 {
 		return;
 	}
 
+	// ButtonWin: Setting label Hello!
+	// ButtonWin: clicking button with label Hello!
+	// CheckBoxWin: Setting Text Select this if you prefer XYZ 
+	// CheckBoxWin: setStatus status true
+	// true
+	// -------------- ------------ ----------  
+	// ButtonLinux: Setting label Hello!
+	// ButtonLinux: clicking button with label Hello!
+	// CheckBoxLinux: Setting Text Select this if you prefer XYZ 
+	// CheckBoxLinux: setStatus status true
+	// true
 }

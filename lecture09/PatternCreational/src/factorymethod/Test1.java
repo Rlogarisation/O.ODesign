@@ -4,7 +4,22 @@ public class Test1 {
 
 	public static void main(String[] args) {
 
-		
+		// -------- ---------- 
+		// Linux Button, lable: Label 1
+		// -------- ---------- 
+		// HTML Button, lable: Label 2
+
+
+		// ***** Using Instance Method ***** 
+
+		// -------- ---------- 
+		// Linux Button, lable: Button 3
+		// -------- ---------- 
+		// Linux Button, lable: Button 4
+		// -------- ---------- 
+		// HTML Button, lable: Button 5
+		// -------- ---------- 
+		// HTML Button, lable: Button 6
 		Button b1 = ButtonFactory.getButton();
 		b1.setLabel("Label 1");
 		
