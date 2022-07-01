@@ -1,0 +1,2 @@
+I used decorator pattern in my design, since I think the extra service can be implemented in a convient way with decorator, 
+as adding the cost of multiple selections can be easily achieved by using decorator pattern.

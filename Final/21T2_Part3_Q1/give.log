@@ -1,0 +1,26 @@
+Session: 21T2
+File src is not a regular file.
+File give.log must not be empty.
+
+
+Submission: exam_part3_q1
+------------------------------
+No submission, all accept groups fail
+------------------------------
+
+SUBMISSION ERROR:
+Either you have not supplied all the required files or the files are not named correctly
+
+Interpretation: exam_part3_q1
+------------------------------
+Accept 1 or more files matching *.java
+   and any other files matching Q1.txt
+------------------------------
+
+Files supplied: exam_part3_q1
+------------------------------
+src
+give.log
+------------------------------
+
+Submission NOT accepted
