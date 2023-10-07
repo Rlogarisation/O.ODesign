@@ -8,20 +8,117 @@
 
 ### Key Concepts
 
-- Abstraction
-  - Abstract class: focus on the common properties and behaviours of objects.
-- Encapsulation
-  - Hiding the object's attribute by implementing private attributions, and access these attributions through getter and setter methods, in order to keep data safe, increase the usability, and reduce dependencies between classes(loose coupling, strong cohesion).
-- Inheritance
-  - Relationship between class with more general concept(parent) and more specialised class(child).
-  - "is-a" type relationship.
-  - new classes are created from the existing classes by absorbing their attributes and behaviours.
-  - More methods can be added in sub-classes, and the inherited method can be over-ridden in sub-classes.
-  - Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
-- Composition
-  - "has-a" relationship.
-  - Class object has an object of another class to store its state or do its work. e.g. Rectangle and line.
-  - Prefer composition over inheritance.
+- 4 Pillars of OOP
+  - Abstraction
+    - Abstract class: focus on the common properties and behaviours of objects.
+    - E.g. When we think of creating different car brands(BMW, Audi etc), we will put all commonalities into class Car, which rules out methods such as Steering system, entertainment system, engine system etc.
+  - Inheritance
+    - Relationship between class with more general concept(parent) and more specialised class(child).
+    - "is-a" type relationship.
+    - new classes are created from the existing classes by absorbing their attributes and behaviours.
+    - More methods can be added in sub-classes, and the inherited method can be over-ridden in sub-classes.
+    - Polymorphism means "many forms", and it occurs when we have many classes that are related to each other by inheritance.
+  - Encapsulation
+    - Hiding the object's attribute by implementing private attributions, and access these attributions through getter and setter methods, in order to keep data safe, increase the usability, and reduce dependencies between classes(loose coupling, strong cohesion).
+    - e.g. A capsule which is mixed of several medicines. The medicines are hidden data to the end user.
+  - Polymorphism
+    - Polymorphism is the ability to perform many things in many ways, such as same name with different method signature.
+    - Static or Compile-time Polymorphism: when the compiler is able to determine the actual function:
+      ```java
+      public class Car{ 
+            
+          public void speed() { 
+          } 
+            
+          public void speed(String accelerator) { 
+          } 
+            
+          public int speed(String accelerator, int speedUp) { 
+              return carSpeed; 
+          } 
+      }
+      ```
+    - Dynamic or Run-time Polymorphism: which can be achieved by method overloading:
+    ```java
+    class DeliveryBoy { 
+  
+    public void deliver() { 
+        System.out.println("Delivering Item"); 
+    } 
+  
+    public static void main(String[] args) { 
+        DeliveryBoy deliveryBoy = getDeliveryBoy(); 
+        deliveryBoy.deliver(); 
+    } 
+  
+    private static DeliveryBoy getDeliveryBoy() { 
+        Random random = new Random(); 
+        int number = random.nextInt(5); 
+        return number % 2 == 0 ? new Postman() : new FoodDeliveryBoy(); 
+    } 
+    } 
+      
+    class Postman extends DeliveryBoy { 
+        @Override
+        public void deliver() { 
+            System.out.println("Delivering Letters"); 
+        } 
+    } 
+      
+    class FoodDeliveryBoy extends DeliveryBoy { 
+        @Override
+        public void deliver() { 
+            System.out.println("Delivering Food"); 
+        } 
+    }
+    ```
+- Relationship
+  - Inheritance (is-a relationship)
+    ```java
+    public class GraphicalCircle extends Circle {
+      Color outline, fill;
+      public GraphicalCircle() 
+        // GraphicalCircle is-a Circle.
+        // GraphicalCircle inherits all the variables and methods of its superclass Circle.
+        super();
+        this.outline = Color.black;
+        this.fill = Color.white;
+        x = 70;
+      }
+    }
+    ```
+  - Association (has-a relationship)
+    - A class object has an object of another class to store its state or do its
+work, e.g. Rectangle and line.
+      ```java
+      public class GraphicalCircle2 {
+        Circle c;
+        Color outline, fill;
+
+        // Has-a relationship
+        // a GraphicalCircle has a (mathematical) Circle.
+        // Prefer composition over inheritance due to best practice and its flexibility.
+        // Method forwarding: uses methods from the class Circle (area and circumference) to define some of the new methods.
+        public GraphicalCircle2() {
+          c = new Circle();
+          this.outline = Color.black;
+          this.fill = Color.white;
+        }
+
+        public GraphicalCircle2(int x, int y, int r, 
+                    Color o, Color f) {
+          c = new Circle(x, y, r);
+          this.outline = o;
+          this.fill = f;
+        }
+      }
+      ```
+    - Represents "uses" relationship between two or more objects in which the objects have their own life-times and there is no "ownership".
+      * Aggregation: A specialised form of association between two or more objects in which objects have their own life cycle but there is ownership as well, e.g. A House has an occupant.
+      * Composition: A specialised form of aggregation in which if the parent object is destroyed, the child objects ceases to exist, e.g. A House has a Room.
+
+
+
 
 ### Lecture Sample Code
 
@@ -97,17 +194,29 @@
 ## Week 02: Introduction to OOP(Cont.)
 
 ### Key Concepts
+- Interface vs Abstract
+  - Abstract: represents a type of object
+    - which is a class that cannot be instantiated and can contain both abstract and non-abstract methods.
+    - Some methods can be implemented, while others are left abstract, meaning that they have no implementation and must be overridden by concrete subclasses.
+    - A class can inherit from only one abstract class via extends, since abstract class represents a type of object.
+    - Abstract classes can have access modifiers such as public, protected, and private for their methods and properties, as well as member variables.
+  - Interface: represents a set of behaviours
+    - Which is a contract that specifies a set of methods that a class must implement.
+    - All methods in an interface are by default abstract and must be implemented by any class that implements the interface.
+    - A class can implement multiple interfaces via implements since which represents a set of behaviours.
+    - Interfaces can only have public access, and variables must be static and final in interface
+* Method forwarding
+  * It uses methods from quoted class, to define some of the new method. (detailed in GraphicalCircle2.java)
+* Super classes
+  * Every class has a superclass, by default, the superclass is class Object.
+  * That is why we need to use overriding method for toString(), equals(), and hasCode() etc.
+* Single inheritance
+  * Java only allows a new class can extend only one superclass, to avoid potential collision with different super functions.
+- Method Overriding and Method Overloading
+  - Overriding: When a class defines a method using the same name, return type,
+and by the number, type, and position of its arguments as a method in its superclass, the method in the class overrides the method in the superclass.
+  - Overloading: Defining methods with the same name and different argument or return types is called method overloading.
 
- * Method forwarding
-   * It uses methods from quoted class, to define some of the new method. (detailed in GraphicalCircle2.java)
- * Super classes
-   * Every class has a superclass, by default, the superclass is class Object.
-   * That is why we need to use overriding method for toString(), equals(), and hasCode() etc.
- * Single inheritance
-   * Java only allows a new class can extend only one superclass, to avoid potential collision with different super functions.
- * Interfaces
-   * Variables must be static and final in interface.
-   * A class can implement more than 1 interface, and extend 1 superclass in the same time. 
 
 ### Questions
 
@@ -304,9 +413,7 @@
 
 ### Key Concepts
 
-* Association: represents "uses" relationship between two or more objects in which the objects have their own life-times and there is no "ownership".
-  * Aggregation: A specialised form of association between two or more objects in which objects have their own life cycle but there is ownership as well.
-  * Composition: A specialised form of aggregation in which if the parent object is destroyed, the child objects ceases to exist.
+
 * Loose coupling, high cohesion.
   * loose coupling: allows components to be used and modified independently of each other.
   * high cohesion: much easier to maintain and less frequently changed and have higher probability of reusability.
